@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h3 class="title">Anwesenheitsliste</h3>
+                <p class="category">Bitte wählen Sie die Kinder aus, welche heute anwesend sind.</p>
+            </div>
+            <div class="content" ng-controller="kitaCtrl">
+                <div class="row" ng-controller="startCtrl">
+                    <div class="col-md-12">
+                        <h3>Gruppenauswahl:</h3>
+
+                        <div class="center-on-page">
+                            <div class="select">
+                                <select name="slct" id="slct" ng-options="kita.value as kita.text for kita in kitas" ng-model="selected" ng-change="hasChanged()">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="carousel-info" style="margin: 30px;">
+                            <p ng-if="count_kids == 0">Diese Gruppe enthählt keine Kinder.</p>
+                            <div class="row" style="margin-top: 10px;" ng-repeat="kid in kids">
+                                <div class="col-xs-3 col-md-2">
+                                    <img alt="" src="{{kid.uImage}}" style="width:60px; height:60px; " class="pull-left img-circle">
+                                </div>
+                                <div class="col-xs-5 col-md-4">
+                                    <div class="pull-left" style="line-height: 60px; vertical-align: middle;">
+                                        <span class="kids-name">{{kid.fullname}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-6">
+                                    <div class="pull-left" style="line-height: 60px; vertical-align: middle; padding-top:7px;">
+                                        <i class="pe-7s-check" style="font-size: 2em; margin-right: 5px; color:green;"></i>
+                                        <i class="pe-7s-close-circle" style="font-size: 2em; color:red;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

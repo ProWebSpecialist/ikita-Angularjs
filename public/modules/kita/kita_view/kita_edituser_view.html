@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h3 class="title">Bearbeiten / Löschen</h3>
+                <p class="category">Bitte wählen Sie den Benutzer aus, welcher bearbeitet / gelöscht werden soll.</p>
+            </div>
+            <div class="content" ng-controller="kitaCtrl">
+                <div ng-controller="loadKitaDataCtrl">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sel1">Gruppe auswählen:</label>
+                                <div class="select">
+                                    <select ng-model="groupSelected" ng-options="group.groupname for group in Groups track by group._id"
+                                        ng-change="loadUsers(groupSelected._id)"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Benutzer auswählen</label>
+                                <div class="select">
+                                    <select ng-model="userSelected" ng-options="user.username for user in Users track by user._id" ng-change="loadUserData(userSelected._id)"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <form name="RegisterForm">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Kita ID</label>
+                                    <input type="text" class="form-control" disabled placeholder="Kita ID" ng-model="kitaid">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Kita-Name</label>
+                                    <input type="text" class="form-control" disabled placeholder="Kita-Name" ng-model="kitaname">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Benutzername</label>
+                                    <input type="text" class="form-control" disabled placeholder="Benutzername" name="username" id="username" ng-model="username"
+                                        required ng-blur="usernameChecker()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Vorname</label>
+                                    <input type="text" class="form-control" placeholder="Vorname" name="first_name" id="first_name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                        ng-minlength="1" ng-model="first_name" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.first_name.$touched && !RegisterForm.first_name.$error.minlength && !RegisterForm.first_name.$valid">Der Vorname darf keine Zahlenwerte enthalten.</p>
+                                <p class="text-danger" ng-show="RegisterForm.first_name.$error.required && RegisterForm.first_name.$touched">Der Vorname darf nicht leer sein.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nachname</label>
+                                    <input type="text" class="form-control" placeholder="Nachname" name="last_name" id="last_name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                        ng-minlength="1" ng-model="last_name" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.last_name.$touched && !RegisterForm.last_name.$error.minlength && !RegisterForm.last_name.$valid">Der Nachname darf keine Zahlenwerte enthalten.</p>
+                                <p class="text-danger" ng-show="RegisterForm.last_name.$error.required && RegisterForm.last_name.$touched">Der Nachname darf nicht leer sein.</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Geburtsdatum</label>
+                                    <input type="date" class="form-control" placeholder="Geburtsdatum" name="birth_date" id="birth_date" ng-model="birth_date"
+                                        required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.birth_date.$error.required && RegisterForm.birth_date.$touched">Das Geburtsdatum darf nicht leer sein.</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PLZ</label>
+                                    <input type="number" class="form-control" placeholder="PLZ" name="plz" id="plz" ng-model="plz" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.plz.$error.required && RegisterForm.plz.$touched">Die Postleizahl darf nicht leer sein.</p>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Ort</label>
+                                    <input type="text" class="form-control" placeholder="Ort" name="ort" id="ort" ng-model="ort" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.ort.$error.required && RegisterForm.ort.$touched">Der Ort darf nicht leer sein.</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Strasse</label>
+                                    <input type="text" class="form-control" placeholder="Strasse" name="street" id="street" ng-pattern="/^[a-zA-Z\s]*$/" ng-minlength="1"
+                                        ng-model="street" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.street.$touched && !RegisterForm.street.$error.minlength && !RegisterForm.street.$valid">Die Strasse darf keine Zahlenwerte enthalten.</p>
+                                <p class="text-danger" ng-show="RegisterForm.street.$error.required && RegisterForm.street.$touched">Die Strasse darf nicht leer sein.</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Haus-Nr</label>
+                                    <input type="text" class="form-control" placeholder="Haus-Nr" name="house_nr" id="house_nr" ng-model="house_nr" required>
+                                </div>
+                                <p class="text-danger" ng-show="RegisterForm.house_nr.$error.required && RegisterForm.house_nr.$touched">Die Haus-Nr darf nicht leer sein.</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" placeholder="Email" ng-model="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Telefon-Nr</label>
+                                    <input type="number" class="form-control" placeholder="Telefon-Nr" ng-model="telefon">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="sel1">Gruppe auswählen:</label>
+                                    <div class="select">
+                                        <select ng-model="groupSelected" ng-options="group.groupname for group in Groups track by group._id">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a ui-sref="kita" class="btn btn-secondary btn-fill pull-right">Abbrechen</a>
+                        <a class="btn btn-danger btn-fill pull-right btn-margin" ng-click="deleteUser()">Benutzer Löschen</a>
+                        <a class="btn btn-primary btn-fill pull-right btn-margin" ng-click="editUser()">Änderungen Speichern</a>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

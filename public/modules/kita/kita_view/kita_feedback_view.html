@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h3 class="title">Feedbackfromular</h3>
+                <p class="category">Bitte geben Sie das Feedback für den Benutzer ein.</p>
+            </div>
+            <div class="content" ng-controller="kitaCtrl">
+                <form name="RegisterForm" ng-controller="feedbackCtrl">
+                    
+                    <p>Bitte wählen Sie den Namen des Kindes, an welches Sie das Feedback senden möchten.</p>
+                    <div class="select" >
+                        <select name="size" ng-model="selected" ng-change="hasChanged()">
+                            <optgroup ng-repeat="group in groups" label="{{group.name}}">
+                                <option style="font-size: 1.3em;" ng-repeat="child in childs" ng-if="child.group == group.id" value="{{child.value}}">{{child.text}}</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <p style="margin-top: 1em;">Titel / Datum</p>
+                    <input class="form-control" ng-model="fbtitle" type="text" id="fbtitle" />
+
+                    <p style="margin-top: 1em;">Inhalt</p>
+                    <textarea class="form-control" ng-model="fbcontent" id="fbInhalt" ></textarea>
+
+                    <a ui-sref="kita" class="btn btn-secondary btn-fill pull-right">Abbrechen</a>
+                    <a class="btn btn-primary btn-fill pull-right btn-margin" ng-click="feedbackSend()">Abschicken</a>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>

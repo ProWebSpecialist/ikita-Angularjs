@@ -1,0 +1,134 @@
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="bootstrapModal" aria-hidden="true" ng-controller="loadKitaModalDataCtrl">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bootstrapModal">{{modalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <p id="eventTitle" ng-if="modalLink === 'editEvent'" style="font-size: 1.6em;">{{eventTitle}}</p>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p ng-if="modalLink != null">{{modalBody}}</p>
+                        <div ng-if="modalLink === 'editPw'">
+                           
+                        </div>
+                        <form ng-if="modalLink === 'editEvent' || modalLink === 'newEvent'">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Beschreibung/Titel</label>
+                                        <input type="text" class="form-control" id="eventName" placeholder="Beginn" ng-model="eventName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Beginn</label>
+                                        <input type="date" class="form-control" id="startDate" placeholder="Beginn" ng-model="startDate" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Startzeit</label>
+                                        <input type="text" class="form-control" id="startTime" placeholder="Startzeit" ng-model="startTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ende</label>
+                                        <input type="date" class="form-control" id="endDate" placeholder="Ende" ng-model="endDate" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Endzeit</label>
+                                        <input type="text" class="form-control" id="endTime" placeholder="Endzeit" ng-model="endTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <input type="text" class="form-control" placeholder="Endzeit" ng-model="endTime2"> -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Font Color</label>
+                                        <input type="color" id="fColor" class="form-control" placeholder="Font Color" ng-model="fColor" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Background Color</label>
+                                        <input type="color" id="bColor" class="form-control" placeholder="Background Color" ng-model="bColor">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Group Select</label>
+                                        <select id="groupNames" ng-options="group.value as group.text for group in groupNames" ng-model="selected" ng-change="hasChanged()"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-if="modalLink === 'editProfilPic'">
+                            <form>
+                                <label class="btn btn-default btn-fill">
+                                    Auswählen
+                                    <input type="file" file-model="file.upload" name="myFile" ng-disabled="uploading" style="display: none;" onchange="angular.element(this).scope().photoChanged(this.files)">
+                                </label>
+                            </form>
+                            <br>
+                            <img ng-src="{{ thumbnail.dataUrl }}" style="max-width: 220px; max-height: 220px;">
+                            <br>
+                            <br>
+                            <div ng-show="message">
+                                <div ng-class="alertUpload">{{ message }}</div>
+                            </div>
+                            <div ng-show="uploading" class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button  ng-if="modalLink === 'editPw'" type="button" class="btn btn-primary btn-fill" ng-click="editPwConfirm()" data-dismiss="modal">{{modalSuccesBtn}}</button>
+
+                    <button ng-if="modalLink === 'deleteUser'" type="button" class="btn btn-danger btn-fill" ng-click="deleteUserConfirm()" data-dismiss="modal">{{modalSuccesBtn}}</button>
+
+                    <button ng-if="modalLink === 'editEvent'" type="button" class="btn btn-danger btn-fill" ng-click="deleteEventConfirm()" data-dismiss="modal">Delete a Event</button>
+                    <button ng-if="modalLink === 'editEvent'" type="button" class="btn btn-primary btn-fill" ng-click="editEventConfirm()" data-dismiss="modal">{{modalSuccesBtn}}</button>
+
+                    <button ng-if="modalLink === 'newEvent'" type="button" class="btn btn-primary btn-fill" ng-click="newEventConfirm()" data-dismiss="modal">{{modalSuccesBtn}}</button>
+
+                    <button ng-if="modalLink === 'editUser'" type="button" class="btn btn-primary btn-fill" ng-click="editUserConfirm()" data-dismiss="modal">{{modalSuccesBtn}}</button>
+
+                    <button ng-if="modalLink === 'editProfilPic'" type="button" class="btn btn-primary btn-fill" ng-show="!uploadSuccess" ng-click="SubmitProfilImg()">Bild hochladen</button>
+                    <button ng-if="modalLink === 'editProfilPic'" type="button" class="btn btn-primary btn-fill" data-dismiss="modal" ng-show="uploadSuccess"
+                        data-dismiss="modal" ng-click="editProfilPicConfirm()">{{modalSuccesBtn}}</button>
+
+                    <button type="button" class="btn btn-secondary btn-fill" ng-click="resetRootScope()" data-dismiss="modal">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

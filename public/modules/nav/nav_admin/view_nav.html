@@ -1,0 +1,110 @@
+<ul class="nav" ng-controller="navCtrl">
+    <li ng-if="isLog()">
+        <div class="user">
+            <div class="photo">
+                <img src="{{profilPathImg}}" style="width: 100px">
+            </div>
+        </div>
+    </li>
+</ul>
+
+<ul class="nav" style="margin-top:2%" ng-controller="navCtrl">
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLog()">
+        <a ui-sref="profil">
+            <div style="margin-left:20%">
+                <i class="pe-7s-user"></i>
+                <p>{{username}}</p>
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul class="nav" style="margin-top:2%" ng-controller="navCtrl">
+    <li class="user-nav navbar-Link" ui-sref-active="active" ng-if="isLogAdmin()" ng-click="navClicked()">
+        <a ui-sref="start">
+            <i class="pe-7s-graph"></i>
+            <p>Start</p>
+        </a>
+    </li>
+    <li class="user-nav navbar-Link" ui-sref-active="active" ng-if="isLogUser()">
+        <a ui-sref="startUser">
+            <i class="pe-7s-graph"></i>
+            <p>Start</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogAdmin()">
+        <a ui-sref="ChatView">
+            <i class="pe-7s-chat"></i>
+            <p>Chat</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogAdmin()">
+        <a ui-sref="kalender">
+            <i class="pe-7s-date"></i>
+            <p>Kalender</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogUser()">
+        <a ui-sref="kalenderUser">
+            <i class="pe-7s-date"></i>
+            <p>Kalender</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogAdmin()">
+        <a ui-sref="kinder">
+            <i class="pe-7s-id"></i>
+            <p>Kinder</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogAdmin()">
+        <a ui-sref="kita">
+            <i class="pe-7s-home"></i>
+            <p>{{kitaname}}</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="isLogUser()">
+        <a ui-sref="kitaUser">
+            <i class="pe-7s-home"></i>
+            <p>{{kitaname}}</p>
+        </a>
+    </li>
+    <li class="navbar-Link" ui-sref-active="active" ng-if="!isLog()">
+        <a ui-sref="login">
+            <i class="pe-7s-upload"></i>
+            <p>Login</p>
+        </a>
+    </li>
+</ul>
+
+
+<ul class="nav nav-mobile-menu" ng-controller="navCtrl">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="navbar-Link" ng-if="isLog()">
+            <a ui-sref="search" ui-sref-active="active">
+                <i class="fa fa-search"></i>
+                <p class="hidden-lg hidden-md">Search</p>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-Link" ng-if="isLog()" ng-controller="navNotificatinoCtrl">
+            <a ui-sref="notification" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-globe"></i>
+                <span ng-if="notifyNum > 0" id="notificationsBadge" class="badge badge-danger">{{notifyNum}}</span>
+                <p>Feedbacks</p>
+            </a>
+        </li>
+        <li class="navbar-Link" ng-if="isLog()">
+            <a ui-sref="profil" ui-sref-active="active">
+                <p>Profil</p>
+            </a>
+        </li>
+        <li class="navbar-Link" ng-if="isLog()">
+            <a ui-sref="login" ng-click="logout()">
+                <p>Log out</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg"></li>
+    </ul>
+</ul>

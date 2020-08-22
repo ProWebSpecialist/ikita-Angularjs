@@ -1,0 +1,127 @@
+<div class="row" ng-controller="kitaCtrl">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h3 class="title">Meine Kita</h3>
+                <p class="category">Führen Sie unterschiedliche Aktionen für Ihre Kita durch.</p>
+            </div>
+            <div class="content">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="card actions actions-light">
+                            <div class="actions-padding">
+                                <h4>Neue Kita-Kinder hinzufügen</h4>
+                                <a ui-sref="register" class="btn btn-primary  btn-fill">Registrieren</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card actions ">
+                            <div class="actions-padding">
+                                <h4>Feedback-Formular ausfüllen</h4>
+                                <a ui-sref="feedbackUser" class="btn btn-primary2 btn-fill">Ausfüllen</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card actions actions-light">
+                            <div class="actions-padding">
+                                <h4>Kinder-Login bearbeiten/löschen</h4>
+                                <a ui-sref="editUser" class="btn btn-primary btn-fill">Bearbeiten/Löschen</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col-md-12" ng-controller="loadKitaDataCtrl">
+        <div class="card" ng-controller="kitaCtrl">
+            <div class="header" >
+                <h3 class="title">{{kitaname}}</h3>
+                <p class="category">Datenblatt</p>
+            </div>
+            <div class="content">
+                <form name="KitaForm">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Kita ID</label>
+                                <input type="text" class="form-control" disabled placeholder="Kita-Id" ng-model="kitaid">
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Kita-Name</label>
+                                <input type="text" class="form-control" placeholder="Kita-Name" ng-model="kitaname">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" class="form-control" placeholder="Email" ng-model="kitaEmail">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Telefon-Nr</label>
+                                <input type="number" class="form-control" placeholder="Telefon" ng-model="kitaTelefon">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Stadt/Ort</label>
+                                <input type="text" class="form-control" placeholder="Ort" ng-model="kitaOrt">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Kanton</label>
+                                <input type="text" class="form-control" placeholder="Kanton" ng-model="kitaKanton">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>PLZ</label>
+                                <input type="number" class="form-control" placeholder="PLZ" ng-model="kitaPlz">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Adresse</label>
+                                <input type="text" class="form-control" placeholder="Adresse" ng-model="kitaAddress">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Über Kita</label>
+                                <textarea rows="5" class="form-control" placeholder="Beschreibung etc." ng-model="kitaDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <a ng-if="KitaForm.$dirty" class="btn btn-primary btn-fill pull-right btn-margin" ng-click="edit()">Daten aktualisieren</a>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
